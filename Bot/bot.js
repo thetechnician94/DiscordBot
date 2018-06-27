@@ -34,10 +34,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
      }
 });
 
-void sendMsg(msg){
+function sendMsg(msg){
 	bot.sendMessage({to: channelID,message: msg});	
 }
-	
-
-
-https://discordapp.com/oauth2/authorize?&client_id=461635519189614593&scope=bot&permissions=0
