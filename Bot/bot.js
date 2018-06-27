@@ -26,16 +26,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				bot.disconnect();
 				break;
 			case "d": 
-				myRole = message.guild.roles.find("name", "Admin");
-				sendMsg(channelID,message,myRole);
-				if(message.member.roles.has()){
-					sendMsg(channelID,message,"Success");
-				}else{
-					sendMsg(channelID,message,"Failure");
-				}
+				sendMsg(channelID,message,message);
 				break;
-			case "deleteMessages": DCP.deleteMessages();
-				break;
+//			case "deleteMessages": DCP.deleteMessages();
+//				break;
 			default: sendMsg(channelID,message,"Unrecognized Command");   
         }
      }
