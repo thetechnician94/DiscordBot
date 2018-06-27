@@ -6,21 +6,40 @@ var bot = new Discord.Client({
    token: auth.token,
    autorun: true
 });
-
 bot.on('ready', function (evt) {});
+
 
 //look at text commands
 bot.on('message', function (user, userID, channelID, message, evt) {
-    if (message.substring(0, 1) == '$') {
+   
+	if (message.substring(0, 1) == '$') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
         args = args.splice(1);
         switch(cmd) {
-            case "test": sendMsg(channelID,message,"test reply");           
+            case "test": sendMsg(channelID,message,"test reply");   
+				break;
+			case "version": sendMsg(channelID,message,"1.0"); 
+				break;
+			case "disconnect": 
+				sendMsg(channelID,message,"Bye");
+				bot.disconnect();
+				break;
+			case "d": 
+				myRole = message.guild.roles.find("name", "Admin");
+				sendMsg(channelID,message,myRole);
+				if(message.member.roles.has()){
+					sendMsg(channelID,message,"Success");
+				}else{
+					sendMsg(channelID,message,"Failure");
+				}
+				break;
+			case "deleteMessages": DCP.deleteMessages();
+				break;
+			default: sendMsg(channelID,message,"Unrecognized Command");   
         }
      }
 });
-
 
 
 function sendMsg(channelID,message,msg){
