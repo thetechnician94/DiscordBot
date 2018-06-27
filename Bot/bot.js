@@ -26,7 +26,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				bot.disconnect();
 				break;
 			case "d": 
-				sendMsg(channelID,message,message);
+				sendMsg(channelID,message,bot.getUser(userID));
 				break;
 //			case "deleteMessages": DCP.deleteMessages();
 //				break;
