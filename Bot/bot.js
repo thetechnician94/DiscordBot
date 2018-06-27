@@ -29,6 +29,8 @@ bot.on('message', msg => {
 			case "botinfo":
 				if(authenticate("Admin",msg)){
 					msg.reply("\nClient: "+bot.user+"\nPing: "+bot.ping+"\nStatus: "+bot.status+"\nUptime: "+(bot.uptime/1000) +" (secs)"+"\nReady at: "+bot.readyAt);
+				}else{
+					msg.reply("You must have the \"Admin\" role to use this command");
 				}
 				break;
 			default: msg.reply("Unrecognized Command");   
@@ -50,8 +52,7 @@ function authenticate(roleName,msg){
 	}
 	let role = msg.guild.roles.find("name", roleName);
 	if(role===null){
-		msg.reply("Role \""+roleName+"\" not found");
-		return;
+		return false;
 	}
 	if(msg.member.roles.has(role.id)) {
 		return true;
