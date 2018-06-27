@@ -4,5 +4,7 @@
   "description": "",
   "main": "bot.js",
   "author": "thetechnician94",
-  "dependencies": {}
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
 }
