@@ -16,11 +16,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var cmd = args[0];
         args = args.splice(1);
         switch(cmd) {
-            case "test": sendMsg("test reply");           
+            case "test": sendMsg(channelID,message,"test reply");           
         }
      }
 });
 
-function sendMsg(msg){
+
+
+function sendMsg(channelID,message,msg){
 	bot.sendMessage({to: channelID,message: msg});	
 }
