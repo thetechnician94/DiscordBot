@@ -1,12 +1,12 @@
-var Discord = require('discord.io');
+var Discord = require('discord.js');
 var auth = require('./auth.json');
 
 // Initialize Discord Bot
-var bot = new Discord.Client({
-   token: auth.token,
-   autorun: true
+var bot = new Discord.Client();
+bot.on('ready', () => {
+  console.log(`Logged in as ${bot.user.tag}!`);
 });
-bot.on('ready', function (evt) {});
+
 
 
 //look at text commands
