@@ -24,33 +24,7 @@ bot.on('message', msg => {
 				msg.reply(msg.author.username);
 				break;
 			case "cleanMsgs":
-				if(authenticate("Admin",msg)){
-					msg.channel.fetchMessages().then(function(data){
-							if(args.length>0){
-								if(args[0]==="all"){
-									msg.channel.bulkDelete(data);	
-								}
-								else{
-									var msgs = data.array();
-									var num=parseInt(args[0]);
-									for(var i=0;i<msgs.length && i<=num;i++){
-										if(!msgs[i].pinned){
-											msgs[i].delete();
-										}
-									}
-								}
-							}
-							else{
-								var msgs = data.array();
-								for(var i=0;i<msgs.length;i++){
-									if(!msgs[i].pinned){
-										msgs[i].delete();
-									}
-								}
-							}
-							
-					});
-				}
+				cleanMsgs(msg,args);
 				break;		
 			case "botinfo":
 				if(authenticate("Admin",msg)){
@@ -81,4 +55,34 @@ function authenticate(roleName,msg){
 	}
 	msg.reply("You must have the \""+roleName+"\" role to use this command");
 	return false;
+}
+
+function cleanMsgs(msg,srgs){
+	if(authenticate("Admin",msg)){
+		msg.channel.fetchMessages().then(function(data){
+				if(args.length>0){
+					if(args[0]==="all"){
+						msg.channel.bulkDelete(data);	
+					}
+					else{
+						var msgs = data.array();
+						var num=parseInt(args[0]);
+						for(var i=0;i<msgs.length && i<=num;i++){
+							if(!msgs[i].pinned){
+								msgs[i].delete();
+							}
+						}
+					}
+				}
+				else{
+					var msgs = data.array();
+					for(var i=0;i<msgs.length;i++){
+						if(!msgs[i].pinned){
+							msgs[i].delete();
+						}
+					}
+				}
+				
+		});
+	}
 }
