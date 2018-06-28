@@ -97,7 +97,7 @@ function updateVoiceChannels(oldUser,newUser){
 		}	
 		var members = oldUser.voiceChannel.members.array();
 		if(!oldUser.user.bot && (newUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
-			newUser.voiceChannel.join().then(connection=>{
+			oldUser.voiceChannel.join().then(connection=>{
 				const dispatcher = connection.playFile("/home/ad/Bot/disconnected.mp3",{bitrate:"auto",passes:3});
 				dispatcher.on("end", end => {
 					connection.disconnect();
