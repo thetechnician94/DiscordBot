@@ -53,7 +53,7 @@ function handleMessage(msg){
 					var members=msg.guild.members.array();
 					var found=false;
 					for(var i=0;i<members.length;i++){
-						if(members[i].user.username.includes(args[0]) || (members[i].nickname!=null && members[i].nickname.includes(args[0]))){
+						if(members[i].user.username.includes(args[0]) || (members[i].nickname!=null && members[i].nickname.includes(args[0])) || args[0]==*){
 							printUser(members[i],msg);
 							found=true;
 						}
@@ -90,7 +90,7 @@ function printUser(member,msg){
 	}else{
 		game=user.presence.game.name;
 	}
-	msg.reply("\nUsername: "+user.username+"\nNickname: "+member.nickname+"\nId: "+user.id+"\nLast Message:\n-------\n"+content+"\n"+date+"\n-------\nStatus: "+user.presence.status+"\nGame: "+game+"\nTag: "+user.tag);
+	msg.reply("\nUsername: "+user.username+"\nNickname: "+member.nickname+"\nJoined: "+member.joinedAt+"\nId: "+user.id+"\nLast Message:\n-------\n"+content+"\n"+date+"\n-------\nStatus: "+user.presence.status+"\nGame: "+game+"\nTag: "+user.tag);
 }
 
 function updateVoiceChannels(oldUser,newUser){	
