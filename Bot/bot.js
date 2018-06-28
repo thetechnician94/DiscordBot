@@ -35,6 +35,8 @@ bot.on('message', msg => {
   }
 });
 
+
+
 bot.login(auth.token);
 
 function authenticate(roleName,msg){
@@ -81,16 +83,23 @@ function cleanMsgs(msg,args){
 				else{
 					var msgs = data.array();
 					var num=parseInt(args[0]);
-					for(var i=0;i<msgs.length && i<=num;i++){
+					var deleted=0;
+					for(var i=msgs.length-1;i>=0;i--){
 						if(!msgs[i].pinned){
 							msgs[i].delete();
+							deleted++;
 						}
+						if(deleted==num){
+							msgs[0].delete();
+							return;
+						}
+						
 					}
 				}
 			}
 			else{
 				var msgs = data.array();
-				for(var i=0;i<msgs.length;i++){
+				for(var i=msgs.length-1;i>=0;i--){
 					if(!msgs[i].pinned){
 						msgs[i].delete();
 					}
