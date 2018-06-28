@@ -45,7 +45,7 @@ function handleMessage(msg){
 				break;
 			case "botinfo":
 				if(authenticate("Admin",msg)){
-					msg.reply("\nVersion: 1.2\nClient: "+bot.user+"\nPing: "+bot.ping+"\nStatus: "+bot.status+"\nUptime: "+(bot.uptime/1000) +" (secs)"+"\nReady at: "+bot.readyAt);
+					msg.reply("\nVersion: 1.21\nClient: "+bot.user+"\nPing: "+bot.ping+"\nStatus: "+bot.status+"\nUptime: "+(bot.uptime/1000) +" (secs)"+"\nReady at: "+bot.readyAt);
 				}
 				break;
 			case "userinfo":
