@@ -24,8 +24,24 @@ bot.on('message', msg => {
 				msg.reply(msg.author.username);
 				break;
 			case "cleanMsgs":
-				msg.reply(bot.sweepMessages(10));
-				break;
+				if(authenticate("Admin",msg)){
+					msg.channel.fetchMessages().then(function(data){
+							if(args[0]==="all"){
+								msg.channel.bulkDelete(data);	
+							}else{
+								var msgs = data.array();
+								for(var i=0;i<msgs.length;i++){
+									if(!msgs[i].pinned){
+										msgs[i].delete();
+									}
+								}
+							}
+							
+					});
+				}else{
+					msg.reply("You must have the \"Admin\" role to use this command");
+				}
+				break;		
 			case "botinfo":
 				if(authenticate("Admin",msg)){
 					msg.reply("\nClient: "+bot.user+"\nPing: "+bot.ping+"\nStatus: "+bot.status+"\nUptime: "+(bot.uptime/1000) +" (secs)"+"\nReady at: "+bot.readyAt);
@@ -40,7 +56,6 @@ bot.on('message', msg => {
 	return;
   }
 });
-
 
 bot.login(auth.token);
 
