@@ -16,12 +16,7 @@ bot.on('message', msg => {
   args = args.splice(1);
   if (msg.content.substring(0,1)=="$") {
    switch(cmd) {
-            case "test": msg.reply("test reply");   
-				break;
 			case "version": msg.reply("1.0"); 
-				break;
-			case "whoami": 
-				msg.reply(msg.author.username);
 				break;
 			case "cleanMsgs":
 				cleanMsgs(msg,args);
@@ -41,11 +36,10 @@ bot.on('message', msg => {
 
 bot.login(auth.token);
 
-
 function authenticate(roleName,msg){
 	if(!msg.guild.available){
 		msg.reply("Guild not available");
-		return;
+		return false;
 	}
 	let role = msg.guild.roles.find("name", roleName);
 	if(role!=null){
