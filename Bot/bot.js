@@ -53,7 +53,7 @@ function handleMessage(msg){
 					var members=msg.guild.members.array();
 					var found=false;
 					for(var i=0;i<members.length;i++){
-						if(members[i].user.username==args[0] || (members[i].nickname!=null && members[i].nickname.includes(args[0]))){
+						if(members[i].user.username.includes(args[0]) || (members[i].nickname!=null && members[i].nickname.includes(args[0]))){
 							printUser(members[i],msg);
 							found=true;
 						}
