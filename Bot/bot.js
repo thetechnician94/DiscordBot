@@ -7,8 +7,6 @@ bot.on('ready', () => {
   console.log(`Logged in as ${bot.user.tag}!`);
 });
 
-
-
 //look at text commands
 bot.on('message', msg => {
   var args = msg.content.substring(1).split(' ');
@@ -16,14 +14,12 @@ bot.on('message', msg => {
   args = args.splice(1);
   if (msg.content.substring(0,1)=="$") {
    switch(cmd) {
-			case "version": msg.reply("1.0"); 
-				break;
 			case "cleanMsgs":
 				cleanMsgs(msg,args);
 				break;		
 			case "botinfo":
 				if(authenticate("Admin",msg)){
-					msg.reply("\nClient: "+bot.user+"\nPing: "+bot.ping+"\nStatus: "+bot.status+"\nUptime: "+(bot.uptime/1000) +" (secs)"+"\nReady at: "+bot.readyAt);
+					msg.reply("\nVersion: 1.0\nClient: "+bot.user+"\nPing: "+bot.ping+"\nStatus: "+bot.status+"\nUptime: "+(bot.uptime/1000) +" (secs)"+"\nReady at: "+bot.readyAt);
 				}
 				break;
 			default: msg.reply("Unrecognized Command");   
@@ -51,7 +47,7 @@ function authenticate(roleName,msg){
 	return false;
 }
 
-function cleanMsgs(msg,srgs){
+function cleanMsgs(msg,args){
 	if(authenticate("Admin",msg)){
 		msg.channel.fetchMessages().then(function(data){
 				if(args.length>0){
