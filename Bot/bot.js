@@ -35,8 +35,6 @@ bot.on('message', msg => {
   }
 });
 
-
-
 bot.login(auth.token);
 
 function authenticate(roleName,msg){
