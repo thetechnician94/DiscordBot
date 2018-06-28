@@ -67,9 +67,9 @@ function updateVoiceChannels(oldUser,newUser){
 			return;
 		}
 		var members = newUser.voiceChannel.members.array();
-		if(!newUser.user.bot && (oldUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)&& members.length>1){
+		if(!newUser.user.bot && (oldUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
 			newUser.voiceChannel.join().then(connection=>{
-				const dispatcher = connection.playFile("E:/Documents/GitHub/DiscordBot/Bot/connected.mp3",{bitrate:"auto",passes:3});
+				const dispatcher = connection.playFile("/home/ad/Bot/connected.mp3",{bitrate:"auto",passes:3});
 				dispatcher.on("end", end => {
 					connection.disconnect();
 				}); 		
