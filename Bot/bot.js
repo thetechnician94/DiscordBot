@@ -48,10 +48,21 @@ function handleMessage(msg){
 					msg.reply("\nVersion: 1.21\nClient: "+bot.user+"\nPing: "+bot.ping+"\nStatus: "+bot.status+"\nUptime: "+(bot.uptime/1000) +" (secs)"+"\nReady at: "+bot.readyAt);
 				}
 				break;
-			case "userinfo":
+			case "searchUser":
 				if(authenticate("Admin",msg)){
-					msg.server.members.get("name", "USERNAMEHERE").id
+					var members=msg.guild.members.array();
+					var found=false;
+					for(var i=0;i<members.length;i++){
+						if(members[i].user.username==args[0] || (members[i].nickname!=null && members[i].nickname.includes(args[0]))){
+							printUser(members[i],msg);
+							found=true;
+						}
+					}	
+					if(!found){
+						msg.reply("No user found");
+					}
 				}
+				
 				break;
 			default: msg.reply("Unrecognized Command");   
      }
@@ -59,6 +70,27 @@ function handleMessage(msg){
   else{
 	return;
   }	
+}
+
+function printUser(member,msg){
+	var content="";
+	var date="";
+	var game="";
+	var user=member.user;
+	if(user.lastMessage==null){
+		content="None";
+		date="None"
+	}
+	else{
+		content=user.lastMessage.content;
+		date=user.lastMessage.createdAt;
+	}
+	if(user.presence.game==null){
+		game="None";
+	}else{
+		game=user.presence.game.name;
+	}
+	msg.reply("\nUsername: "+user.username+"\nNickname: "+member.nickname+"\nId: "+user.id+"\nLast Message:\n-------\n"+content+"\n"+date+"\n-------\nStatus: "+user.presence.status+"\nGame: "+game+"\nTag: "+user.tag);
 }
 
 function updateVoiceChannels(oldUser,newUser){	
