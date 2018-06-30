@@ -195,13 +195,16 @@ updateVoiceChannels - changes the name to the name of the most frequent game bei
 */
 function updateVoiceChannels(oldUser,newUser){	
 	if(newUser.voiceChannel!=null){ //joining
+		if(newUser.user.bot){
+			return;
+		}
 		log(4,"User is in new Voice channel or muted/unmuted");
 		if(newUser.voiceChannel.name=="Admin" || newUser.voiceChannel.name=="AFK"){
 			log(4,"This channel is ignored");
 			return;
 		}
 		var members = newUser.voiceChannel.members.array();
-		if(!newUser.user.bot && (oldUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
+		if((oldUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
 			log(4,"User connected, not result of mute/unmute. Playing \"connected\" voice");
 			try{
 				newUser.voiceChannel.join().then(connection=>{
@@ -236,6 +239,9 @@ function updateVoiceChannels(oldUser,newUser){
 		}
 	}
 	if(oldUser.voiceChannel!=null){//leaving
+		if(oldUser.user.bot){
+			return;
+		}
 		log(4,"User left a voice channel or muted/unmuted");
 		if(oldUser.voiceChannel.name=="Admin" || oldUser.voiceChannel.name=="AFK"){
 			log(4,"This channel is ignored");
