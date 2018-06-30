@@ -79,7 +79,6 @@ function handleMessage(msg){
 			log(2,"Attempting to clean messages in "+msg.channel.name);
 			if(authenticate("Admin",msg)){
 				cleanMsgs(msg,args);
-				log(2,"Cleaned messages in "+msg.channel.name);
 				return;
 			}
 			log(2,"Failure to clean messages in "+msg.channel.name+". "+msg.author.username+" missing required role");
