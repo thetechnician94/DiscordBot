@@ -203,12 +203,16 @@ function updateVoiceChannels(oldUser,newUser){
 		var members = newUser.voiceChannel.members.array();
 		if(!newUser.user.bot && (oldUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
 			log(4,"User connected, not result of mute/unmute. Playing \"connected\" voice");
-			newUser.voiceChannel.join().then(connection=>{
-				const dispatcher = connection.playFile("/home/ad/Bot/connected.mp3",{bitrate:"auto",passes:3});
-				dispatcher.on("end", end => {
-					connection.disconnect();
-				}); 		
-			}).catch(log(4,err));
+			try{
+				newUser.voiceChannel.join().then(connection=>{
+					const dispatcher = connection.playFile("/home/ad/Bot/connected.mp3",{bitrate:"auto",passes:3});
+					dispatcher.on("end", end => {
+						connection.disconnect();
+					}); 		
+				});
+			}catch(err){
+				log(1,err);
+			}
 		}
 		var members = newUser.voiceChannel.members.array();
 		if(members.length==0){
