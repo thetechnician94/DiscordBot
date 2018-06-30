@@ -124,8 +124,16 @@ function handleMessage(msg){
 			log(2,"Attempting to change log level");
 			if(authenticate("Admin",msg)){
 				try{
+				var temp = loggingLevel;
 				loggingLevel=parseInt(args[0]);
-				msg.reply("Logging Level changed to "+loggingLevel);
+				if(isNaN(loggingLevel)){
+					log(1,"Error parsing new log level\n"+err);
+					loggingLevel=temp;
+					msg.reply("Logging level must be an integer");
+					
+				}else{
+					msg.reply("Logging Level changed to "+loggingLevel);
+				}
 				}catch(err){
 					log(1,"Error parsing new log level\n"+err);
 					return;
