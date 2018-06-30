@@ -127,7 +127,7 @@ function handleMessage(msg){
 				var temp = loggingLevel;
 				loggingLevel=parseInt(args[0]);
 				if(isNaN(loggingLevel)){
-					log(1,"Error parsing new log level\n"+err);
+					log(1,"Error parsing new log level");
 					loggingLevel=temp;
 					msg.reply("Logging level must be an integer");
 					
