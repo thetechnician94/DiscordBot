@@ -89,6 +89,7 @@ handleMessage - takes a Message object, determines if it is for this bot, and ru
 function handleMessage(msg){
 	if(!msg.author.bot && msg.channel.type=="dm"){
 		handleDM(msg);
+		return;
 	}
 	if(msg.author.bot || msg.content.substring(0,1)!=commandSymbol){
 		log(4,"Message discarded, not for me");
