@@ -78,8 +78,8 @@ function handleMessage(msg){
 		case "cleanMsgs":
 			log(2,"Attempting to clean messages in "+msg.channel.name);
 			if(authenticate("Admin",msg)){
-				log(2,"Cleaned messages in "+msg.channel.name);
 				cleanMsgs(msg,args);
+				log(2,"Cleaned messages in "+msg.channel.name);
 				return;
 			}
 			log(2,"Failure to clean messages in "+msg.channel.name+". "+msg.author.username+" missing required role");
@@ -333,7 +333,7 @@ function cleanMsgs(msg,args){
 				var msgs = data.array();
 				try{
 					var num=parseInt(args[0]);
-					log(1,"Cleaning "+num+" messages");
+					
 				}
 				catch(err){
 					log(3,"Error getting number of messages\n"+err);
@@ -344,6 +344,7 @@ function cleanMsgs(msg,args){
 					msg.reply("Please specify \"all\" or a positive integer");
 					return;
 				}
+				log(1,"Cleaning "+num+" messages");
 				var deleted=0;
 				for(var i=msgs.length-1;i>=0;i--){
 					if(!msgs[i].pinned){
