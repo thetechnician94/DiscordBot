@@ -41,16 +41,29 @@ try{
 		log(4,"Presence Update Event Fired");
 		updateVoiceChannels(oldUser,newUser);
 	});
+	
+	bot.on('disconnect', evt => {		
+		log(1,"Bot disconnected, attempting to reconnect");
+		login();
+	});
 
 	//login the bot to discord.
-	log(1,"Logging in"); 
-	bot.login(auth.token);
-	log(1,"Logged in succesfully");
-	console.log("Bot Started");
+	login();
 }catch(err){
 	log(1,err.message);
 }
 //functions
+
+/*
+login - logs the bot in
+*/
+
+function login(){
+	log(1,"Logging in"); 
+	bot.login(auth.token);
+	log(1,"Logged in succesfully");
+	console.log("Bot Started");
+}
 
 /*
 log - writes to log file and console if the level of the log command is less or equal to the global logging level. Can be turned off with a logging level of 0.
