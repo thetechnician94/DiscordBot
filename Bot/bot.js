@@ -17,36 +17,39 @@ var bot = new Discord.Client();
 bot.on('ready', () => {});
 
 //event handling
+try{
+	/*
+	a Message is sent in a text channel 
+	*/
+	bot.on('message', msg => {
+		log(4,"Message Event Fired");
+		handleMessage(msg);
+	});
 
-/*
-a Message is sent in a text channel 
-*/
-bot.on('message', msg => {
-	log(4,"Message Event Fired");
-	handleMessage(msg);
-});
+	/*
+	someone joins/leaves a voice channel or /mutes/unmutes themselves
+	*/
+	bot.on('voiceStateUpdate', (oldUser,newUser) => {		
+		log(4,"Voice State Update Event Fired");
+		updateVoiceChannels(oldUser,newUser);
+	});
 
-/*
-someone joins/leaves a voice channel or /mutes/unmutes themselves
-*/
-bot.on('voiceStateUpdate', (oldUser,newUser) => {		
-	log(4,"Voice State Update Event Fired");
-	updateVoiceChannels(oldUser,newUser);
-});
+	/*
+	someone goes changes online status or game status
+	*/
+	bot.on('presenceUpdate', (oldUser,newUser) => {		
+		log(4,"Presence Update Event Fired");
+		updateVoiceChannels(oldUser,newUser);
+	});
 
-/*
-someone goes changes online status or game status
-*/
-bot.on('presenceUpdate', (oldUser,newUser) => {		
-	log(4,"Presence Update Event Fired");
-	updateVoiceChannels(oldUser,newUser);
-});
-
-//login the bot to discord.
-log(1,"Logging in"); 
-bot.login(auth.token);
-log(1,"Logged in succesfully");
-console.log("Bot Started");
+	//login the bot to discord.
+	log(1,"Logging in"); 
+	bot.login(auth.token);
+	log(1,"Logged in succesfully");
+	console.log("Bot Started");
+}catch(err){
+	log(1,err.message);
+}
 //functions
 
 /*
