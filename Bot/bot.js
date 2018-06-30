@@ -122,6 +122,7 @@ function handleMessage(msg){
 			if(authenticate("Admin",msg)){
 				try{
 				loggingLevel=parseInt(args[0]);
+				msg.reply("Logging Level changed to "+loggingLevel);
 				}catch(err){
 					log(1,"Error parsing new log level\n"+err);
 					return;
