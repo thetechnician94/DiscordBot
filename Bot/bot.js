@@ -5,7 +5,7 @@ var ffmpeg = require('ffmpeg');
 var fs = require('fs');
 
 //logging variables
-var loggingLevel=4;
+var loggingLevel=1;
 var logFile="./log.txt";
 
 //symbol used to invoke message commands
