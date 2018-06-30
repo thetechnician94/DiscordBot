@@ -7,6 +7,7 @@ var fs = require('fs');
 //logging variables
 var loggingLevel=1;
 var logFile="./log.txt";
+var logConsole=false;
 
 //symbol used to invoke message commands
 var commandSymbol="%";
@@ -45,6 +46,7 @@ bot.on('presenceUpdate', (oldUser,newUser) => {
 log(1,"Logging in"); 
 bot.login(auth.token);
 log(1,"Logged in succesfully");
+console.log("Bot Started");
 //functions
 
 /*
@@ -56,7 +58,9 @@ function log(level,msg){
 	}
 	var logStream = fs.createWriteStream(logFile, {'flags': 'a'});
 	logStream.end(new Date().toString()+msg+"\n");
-	console.log(new Date().toString()+msg);
+	if(logConsole){
+		console.log(new Date().toString()+msg);
+	}
 }
 
 /*
@@ -131,6 +135,21 @@ function handleMessage(msg){
 			}
 			log(2,"Failure to change log level for "+msg.author.username+". Missing required role");
 			break;
+		case "logConsole":
+			log(2,"Attempting to change log console");
+			if(authenticate("Admin",msg)){
+				try{
+				loggingConsole=parseBool(args[0]);
+				msg.reply("Logging to console changed to "+logConsole);
+				}catch(err){
+					log(1,"Error parsing boolean\n"+err);
+					return;
+				}
+				log(1,"Logging to console changed to "+logConsole);
+				return;
+			}
+			log(2,"Failure to change log to console for "+msg.author.username+". Missing required role");
+			break;	
 		default: msg.reply("Unrecognized Command");   
 	}
 }
