@@ -139,7 +139,7 @@ function handleMessage(msg){
 			log(2,"Attempting to change log console");
 			if(authenticate("Admin",msg)){
 				try{
-				logConsole=parseBoolean(args[0]);
+				logConsole=parseBool(args[0]);
 				msg.reply("Logging to console changed to "+logConsole);
 				}catch(err){
 					log(1,"Error parsing boolean\n"+err);
