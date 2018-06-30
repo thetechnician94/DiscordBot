@@ -265,7 +265,7 @@ function updateVoiceChannels(oldUser,newUser){
 		for(var i=0;i<members.length;i++){
 			if(members[i].presence.game!=null){
 				games.push(members[i].presence.game.name);
-				log(5,"A Member is playng a game");
+				log(5,"A Member is playing a game");
 			}
 		}
 		if(games.length==0){
@@ -274,7 +274,7 @@ function updateVoiceChannels(oldUser,newUser){
 		}else{
 			var game=mode(games);
 			log(4,"Changing channel name to "+game);
-			newUser.voiceChannel.setName(game);
+			oldUser.voiceChannel.setName(game);
 		}
 	}
 }
