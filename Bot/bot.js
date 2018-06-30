@@ -266,15 +266,17 @@ function authenticate(roleName,msg){
 		return false;
 	}
 	let role = msg.guild.roles.find("name", roleName);
-	log(3,roleName+" does not exist!");
+	
 	if(role!=null){
 		if(msg.member.roles.has(role.id)) {
-			log(4,msg.member.username+" passed role check for "+roleName);
+			log(4,msg.member.user.username+" passed role check for "+roleName);
 			return true;
 		}
+	}else{
+		log(3,roleName+" does not exist!");
 	}
 	msg.reply("You must have the \""+roleName+"\" role to use this command");
-	log(4,msg.member.username+" failed role check for "+roleName);
+	log(4,msg.member.user.username+" failed role check for "+roleName);
 	return false;
 }
 
