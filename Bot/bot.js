@@ -87,6 +87,9 @@ function log(level,msg){
 handleMessage - takes a Message object, determines if it is for this bot, and runs the appropiate function
 */
 function handleMessage(msg){
+	if(!msg.author.bot && msg.channel.type=="dm"){
+		handleDM(msg);
+	}
 	if(msg.author.bot || msg.content.substring(0,1)!=commandSymbol){
 		log(4,"Message discarded, not for me");
 		return;
@@ -184,6 +187,10 @@ function handleMessage(msg){
 			break;	
 		default: msg.reply("Unrecognized Command");   
 	}
+}
+
+function handleDM(msg){
+	msg.reply("Sorry! I don't reply to DMs...yet");	
 }
 
 /*
@@ -302,7 +309,7 @@ function printHelp(msg,args){
 authenticate - takes a String that is the name of a role and a Message object to determine if the author of this message has the required role. returns true if they do or false if they do not. Also replies to the message to tell the user they lack required privileges
 */
 function authenticate(roleName,msg){
-	if(!msg.guild.available){
+	if(msg.guild==null || !msg.guild.available){
 		msg.reply("An error occurred while authenticating your user, please try again");
 		log(1,"Guild not available");
 		return false;
