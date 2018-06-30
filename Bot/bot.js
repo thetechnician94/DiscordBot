@@ -208,7 +208,7 @@ function updateVoiceChannels(oldUser,newUser){
 				dispatcher.on("end", end => {
 					connection.disconnect();
 				}); 		
-			}).catch();
+			}).catch(log(4,err));
 		}
 		var members = newUser.voiceChannel.members.array();
 		if(members.length==0){
