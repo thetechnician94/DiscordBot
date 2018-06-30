@@ -8,8 +8,6 @@ var fs = require('fs');
 var loggingLevel=4;
 var logFile="./log.txt";
 
-  console.log(`Logged in as ${bot.user.tag}!`);
-})
 //symbol used to invoke message commands
 var commandSymbol="%";
 
@@ -294,7 +292,7 @@ function searchMsgs(msg,args){
 					if (msgs[i].content.includes(args[k])){
 						log(5,"Matching message found");
 						msg.reply("\n"+msgs[i].author.username+"\n\n"+msgs[i].content+"\n\n"+msgs[i].createdAt);
-						break;;
+						break;
 					}
 				}
 			}			
@@ -334,10 +332,10 @@ function cleanMsgs(msg,args){
 					return;
 				}
 				if(isNaN(num) || num<1){
-						log(2,"Invalid Number supplied");
-						msg.reply("Please specify \"all\" or a positive integer");
-						return;
-					}
+					log(2,"Invalid Number supplied");
+					msg.reply("Please specify \"all\" or a positive integer");
+					return;
+				}
 				var deleted=0;
 				for(var i=msgs.length-1;i>=0;i--){
 					if(!msgs[i].pinned){
