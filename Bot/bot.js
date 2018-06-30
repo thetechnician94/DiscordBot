@@ -42,6 +42,10 @@ try{
 		updateVoiceChannels(oldUser,newUser);
 	});
 	
+	
+	/*
+	bot got disconnected
+	*/
 	bot.on('disconnect', evt => {		
 		log(1,"Bot disconnected, attempting to reconnect");
 		login();
@@ -220,6 +224,7 @@ function updateVoiceChannels(oldUser,newUser){
 			return;
 		}
 		var members = newUser.voiceChannel.members.array();
+		/*
 		if((oldUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
 			log(4,"User connected, not result of mute/unmute. Playing \"connected\" voice");
 			try{
@@ -233,6 +238,7 @@ function updateVoiceChannels(oldUser,newUser){
 				log(1,err.message);
 			}
 		}
+		*/
 		var members = newUser.voiceChannel.members.array();
 		if(members.length==0){
 			log(4,"No more members in channel");
