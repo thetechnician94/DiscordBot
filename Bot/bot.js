@@ -120,7 +120,12 @@ function handleMessage(msg){
 		case "logLevel":
 			log(2,"Attempting to change log level");
 			if(authenticate("Admin",msg)){
-				loggingLevel=parseInt(args[0]).catch(err);
+				try{
+				loggingLevel=parseInt(args[0]);
+				}catch(err){
+					log(1,"Error parsing new log level\n"+err);
+					return;
+				}
 				log(1,"Log level changed to "+loggingLevel);
 				return;
 			}
