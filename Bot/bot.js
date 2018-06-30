@@ -211,7 +211,7 @@ function printUser(member,msg){
 }
 
 /*
-updateVoiceChannels - changes the name to the name of the most frequent game being played in this channel, Just chatting if no one is playing a game, or Open Voice channel if no one is in the channel. Also plays the "user connected" message on join
+updateVoiceChannels - changes the name to the name of the most frequent game being played in this channel, Just chatting if no one is playing a game, or Open Voice channel if no one is in the channel.
 */
 function updateVoiceChannels(oldUser,newUser){	
 	if(newUser.voiceChannel!=null){ //joining
@@ -223,22 +223,6 @@ function updateVoiceChannels(oldUser,newUser){
 			log(4,"This channel is ignored");
 			return;
 		}
-		var members = newUser.voiceChannel.members.array();
-		/*
-		if((oldUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
-			log(4,"User connected, not result of mute/unmute. Playing \"connected\" voice");
-			try{
-				newUser.voiceChannel.join().then(connection=>{
-					const dispatcher = connection.playFile("/home/ad/Bot/connected.mp3",{bitrate:"auto",passes:3});
-					dispatcher.on("end", end => {
-						connection.disconnect();
-					}); 		
-				});
-			}catch(err){
-				log(1,err.message);
-			}
-		}
-		*/
 		var members = newUser.voiceChannel.members.array();
 		if(members.length==0){
 			log(4,"No more members in channel");
@@ -256,8 +240,9 @@ function updateVoiceChannels(oldUser,newUser){
 			log(4,"No one is playing a game");
 			newUser.voiceChannel.setName("Just Chatting");
 		}else{
-			log(4,"Changing channel name to "+mode(games));
-			newUser.voiceChannel.setName(mode(games));
+			var game=mode(games);
+			log(4,"Changing channel name to "+game);
+			newUser.voiceChannel.setName(game);
 		}
 	}
 	if(oldUser.voiceChannel!=null){//leaving
@@ -270,14 +255,7 @@ function updateVoiceChannels(oldUser,newUser){
 			return;
 		}	
 		var members = oldUser.voiceChannel.members.array();
-		/*if(!oldUser.user.bot && (newUser.voiceChannel==null || oldUser.voiceChannel != newUser.voiceChannel)){
-			oldUser.voiceChannel.join().then(connection=>{
-				const dispatcher = connection.playFile("/home/ad/Bot/disconnected.mp3",{bitrate:"auto",passes:3});
-				dispatcher.on("end", end => {
-					connection.disconnect();
-				}); 		
-			}).catch(console.error);;
-		}*/
+		
 		if(members.length==0){
 			log(4,"There is no one in this channel");
 			oldUser.voiceChannel.setName("Open Voice Channel");
@@ -294,8 +272,9 @@ function updateVoiceChannels(oldUser,newUser){
 			log(4,"No one is playing a game");
 			oldUser.voiceChannel.setName("Just Chatting");
 		}else{
-			log(4,"Changing channel name to "+mode(games));
-			oldUser.voiceChannel.setName(mode(games));
+			var game=mode(games);
+			log(4,"Changing channel name to "+game);
+			newUser.voiceChannel.setName(game);
 		}
 	}
 }
