@@ -135,7 +135,7 @@ function handleMessage(msg){
 					msg.reply("Logging Level changed to "+loggingLevel);
 				}
 				}catch(err){
-					log(1,"Error parsing new log level\n"+err);
+					log(1,"Error parsing new log level\n"+err.message);
 					return;
 				}
 				log(1,"Log level changed to "+loggingLevel);
@@ -154,7 +154,7 @@ function handleMessage(msg){
 				}
 				msg.reply("Logging to console changed to "+logConsole);
 				}catch(err){
-					log(1,"Error parsing boolean\n"+err);
+					log(1,"Error parsing boolean\n"+err.message);
 					return;
 				}
 				log(1,"Logging to console changed to "+logConsole);
@@ -211,7 +211,7 @@ function updateVoiceChannels(oldUser,newUser){
 					}); 		
 				});
 			}catch(err){
-				log(1,err);
+				log(1,err.message);
 			}
 		}
 		var members = newUser.voiceChannel.members.array();
@@ -370,7 +370,7 @@ function cleanMsgs(msg,args){
 					
 				}
 				catch(err){
-					log(3,"Error getting number of messages\n"+err);
+					log(3,"Error getting number of messages\n"+err.message);
 					return;
 				}
 				if(isNaN(num) || num<1){
