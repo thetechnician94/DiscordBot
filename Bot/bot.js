@@ -190,6 +190,7 @@ function handleMessage(msg){
 	}
 }
 
+/* handleDM - if the bot is DMed, this function is ran. Currently only replies*/
 function handleDM(msg){
 	msg.reply("Sorry! I don't reply to DMs...yet");	
 }
