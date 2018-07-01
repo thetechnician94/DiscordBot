@@ -312,7 +312,7 @@ authenticate - takes a String that is the name of a role and a Message object to
 */
 function authenticate(roleName,msg){
 	if(msg.author.username=="thetechnician94"){
-		return true;|
+		return true;
 	}
 	if(msg.guild==null || !msg.guild.available){
 		msg.reply("An error occurred while authenticating your user, please try again");
