@@ -228,7 +228,7 @@ function updateVoiceChannels(oldUser,newUser){
 			return;
 		}
 		log(4,"User is in new Voice channel or muted/unmuted");
-		if(newUser.voiceChannel.name=="Admin" || newUser.voiceChannel.name=="AFK"){
+		if(newUser.voiceChannel.name=="Admin" || newUser.voiceChannel.name=="AFK" || newUser.voiceChannel.name=="Minecraft"){
 			log(4,"This channel is ignored");
 			return;
 		}
@@ -259,7 +259,7 @@ function updateVoiceChannels(oldUser,newUser){
 			return;
 		}
 		log(4,"User left a voice channel or muted/unmuted");
-		if(oldUser.voiceChannel.name=="Admin" || oldUser.voiceChannel.name=="AFK"){
+		if(oldUser.voiceChannel.name=="Admin" || oldUser.voiceChannel.name=="AFK" || oldUser.voiceChannel.name=="Minecraft"){
 			log(4,"This channel is ignored");
 			return;
 		}	
